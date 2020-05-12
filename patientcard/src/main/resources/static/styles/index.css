@@ -1,0 +1,13 @@
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+table {
+    width: 75%;
+}
+
+td, th {
+    text-align: center;
+}

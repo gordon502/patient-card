@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Patient card app</title>
+        <meta charset="utf8" />
+        <link rel="stylesheet" href="styles/index.css">
+        <script type="text/javascript" src="scripts/functions.js"></script>
+    </head>
+    <body>
+        <header>System elektronicznej karty pacjenta</header>
+        <div>Wprowadź nazwisko w celu wyszukania konkretnej osoby</div>
+        <input type="text" id="surname" name="surname" placeholder="Nazwisko">
+        <input type="button" id="sendButton" value="Szukaj" onclick="fillTable()">
+        <table id="patientsTable"></table>
+    </body>
+</html>
