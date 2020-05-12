@@ -7,25 +7,24 @@ import java.util.Date;
  * most needed informations.
  */
 public class Patient {
-    private int id;
+    private String id;
     private String name;
     private String gender;
     private String birthDate;
     private String address;
     private String telecom;
-    private boolean active;
 
-    public Patient(int id, String name, String gender, String birthDate, String address,
-                   String telecom, boolean active) {
+    public Patient(String id, String name, String gender, String birthDate, String address,
+                   String telecom) {
         this.id = id;
         this.name = name;
         this.gender = gender;
         this.birthDate = birthDate;
         this.address = address;
-        this.active = active;
+        this.telecom = telecom;
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
@@ -48,11 +47,5 @@ public class Patient {
     public String getTelecom() {
         return telecom;
     }
-
-    public boolean isActive() {
-        return active;
-    }
-
-
 
 }
