@@ -10,13 +10,17 @@ import java.util.ArrayList;
 @RestController
 public class PatientsEndpoint {
 
+    private PatientsService service;
+    private final String SERVER_ADDR = "http://localhost:8080/baseDstu3";
+
+    public PatientsEndpoint(PatientsService service) {
+        this.service = service;
+    }
+
     @GetMapping(value = "/Patients")
     public ResponseEntity<ArrayList<Patient>> getAllPatients() {
-        Patient patient = new Patient(1, "123", "123", "11-12-2020",
-                                      "eldoka1", "123", false);
-        ArrayList<Patient> patients = new ArrayList<>();
-        patients.add(patient);
-        patients.add(patient);
-        return new ResponseEntity<ArrayList<Patient>>(patients, HttpStatus.OK);
+        return new ResponseEntity<ArrayList<Patient>>(
+                service.getPatientsFromFHIRServer(SERVER_ADDR),
+                HttpStatus.OK);
     }
 }
