@@ -1,13 +1,75 @@
-body {
+html, body {
+    height: 100%;
+    margin: 0;
+    background-image: url("helth.jpg");
+    background-repeat: repeat;
+    background-size: cover;
+}
+
+
+.column {
+    height: 100%;
+    float: left;
+}
+
+#leftColumn, #rightColumn {
+    width: 12.5%;
+}
+
+#contentColumn {
     display: flex;
     flex-direction: column;
     align-items: center;
+    align-content: center;
+    width: 75%;
+    background-color: rgba(255, 255, 204 ,0.5);
+}
+
+#enterName {
+    margin-bottom: 20px;
+}
+
+#surname {
+    padding-top: 5px;
+}
+
+h1 {
+    width: 75%;
+    margin-bottom: 50px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    text-align: center;
+    background-color: rgba(250, 250, 210, 0.5);
 }
 
 table {
-    width: 75%;
+    margin-top: 20px;
+    width: 100%;
+    margin-bottom: 50px;
+}
+
+tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+tr:nth-child(odd) {
+    background-color: #d9d9d9;
+}
+
+tr:hover {
+    background-color: #ffff99;
+}
+
+input {
+    text-align: center;
+}
+
+th {
+    background-color: red;
+    color: white;
 }
 
 td, th {
     text-align: center;
+    border-bottom: 1px solid #ddd;
 }

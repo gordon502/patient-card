@@ -7,10 +7,28 @@
         <script type="text/javascript" src="scripts/functions.js"></script>
     </head>
     <body>
-        <header>System elektronicznej karty pacjenta</header>
-        <div>Wprowadź nazwisko w celu wyszukania konkretnej osoby</div>
+    <div id="leftColumn" class="column"></div>
+    <div id="contentColumn" class="column">
+                <h1>System elektronicznej karty pacjenta</h1>
+        <div id="enterName">Wprowadź nazwisko w celu wyszukania konkretnej osoby</div>
         <input type="text" id="surname" name="surname" placeholder="Nazwisko">
-        <input type="button" id="sendButton" value="Szukaj" onclick="fillTable()">
-        <table id="patientsTable"></table>
+        <input type="button" id="sendButton" value="Szukaj" onclick="fillTable();">
+        <table id="patientsTable">
+            <thead>
+            <tr>
+                <th onclick="sortTable(0)">ID</th>
+                <th onclick="sortTable(1)">Imię i nazwisko</th>
+                <th onclick="sortTable(2)">Płeć</th>
+                <th onclick="sortTable(3)">Data urodzenia</th>
+                <th onclick="sortTable(4)">Adres zamieszkania</th>
+                <th onclick="sortTable(5)">Nr telefonu</th>
+                <th>Szczegóły</th>
+            </tr>
+            </thead>
+            <tbody id="rowToInsert"></tbody>
+        </table>
+        <div>.</div>
+    </div>
+    <div id="rightColumn" class="column"></div>
     </body>
 </html>
