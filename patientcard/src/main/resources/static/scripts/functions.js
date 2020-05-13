@@ -9,7 +9,12 @@ const patientsTableLegend = `    <tr>
                                 </tr>`;
 
 function fillTable() {
-    fetch('http://localhost:8081/Patients')
+    var URL = 'http://localhost:8081/Patients'
+    const param = document.getElementById('surname').value;
+    if (param.length != 0) {
+        URL += '?name=' + param;
+    }
+    fetch(URL)
         .then(response => response.json())
         .then(data => {
             var tableStructure = '';

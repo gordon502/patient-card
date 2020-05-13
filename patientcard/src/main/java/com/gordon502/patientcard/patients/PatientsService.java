@@ -13,10 +13,15 @@ import java.util.ArrayList;
 @Service
 public class PatientsService {
 
-    public ArrayList<Patient> getPatientsFromFHIRServer(String server_addr) {
-        String finalUrl = server_addr + "/Patient?_sort=_id&_pretty=true";
+    public ArrayList<Patient> getPatientsFromFHIRServer(String server_addr, String family) {
+        String Url = server_addr + "/Patient?_sort=_id&_pretty=true";
 
-        JsonNode jsonResponse = readJSONFromServer(finalUrl);
+        //if request param was passed
+        if (family != null) {
+            Url += "&family=" + family;
+        }
+
+        JsonNode jsonResponse = readJSONFromServer(Url);
 
         //empty FHIR server
         if (jsonResponse == null) {
