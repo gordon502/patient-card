@@ -1,12 +1,6 @@
-const patientsTableLegend = `    <tr>
-                                    <th onclick="sortTable(0)">ID</th>
-                                    <th onclick="sortTable(1)">Imię i nazwisko</th>
-                                    <th onclick="sortTable(2)">Płeć</th>
-                                    <th onclick="sortTable(3)">Data urodzenia</th>
-                                    <th onclick="sortTable(4)">Adres zamieszkania</th>
-                                    <th onclick="sortTable(5)">Nr telefonu</th>
-                                    <th>Szczegóły</th>
-                                </tr>`;
+$(document).ready(function () {
+    fillTable();
+});
 
 function fillTable() {
     var URL = 'http://localhost:8081/Patients'

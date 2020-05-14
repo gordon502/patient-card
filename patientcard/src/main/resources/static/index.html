@@ -4,6 +4,7 @@
         <title>Patient card app</title>
         <meta charset="utf8" />
         <link rel="stylesheet" href="styles/index.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
         <script type="text/javascript" src="scripts/functions.js"></script>
     </head>
     <body>
@@ -14,18 +15,28 @@
         <input type="text" id="surname" name="surname" placeholder="Nazwisko">
         <input type="button" id="sendButton" value="Szukaj" onclick="fillTable();">
         <table id="patientsTable">
-            <thead>
-            <tr>
-                <th onclick="sortTable(0)">ID</th>
-                <th onclick="sortTable(1)">Nazwisko i imię</th>
-                <th onclick="sortTable(2)">Płeć</th>
-                <th onclick="sortTable(3)">Data urodzenia</th>
-                <th onclick="sortTable(4)">Adres zamieszkania</th>
-                <th onclick="sortTable(5)">Nr telefonu</th>
-                <th>Szczegóły</th>
-            </tr>
+            <thead id="thToInsert">
+                <tr>
+                    <th onclick="sortTable(0)">ID</th>
+                    <th onclick="sortTable(1)">Nazwisko i imię</th>
+                    <th onclick="sortTable(2)">Płeć</th>
+                    <th onclick="sortTable(3)">Data urodzenia</th>
+                    <th onclick="sortTable(4)">Adres zamieszkania</th>
+                    <th onclick="sortTable(5)">Nr telefonu</th>
+                    <th>Szczegóły</th>
+                </tr>
             </thead>
-            <tbody id="rowToInsert"></tbody>
+            <tbody id="rowToInsert">
+                <tr>
+                    <td>b1684b5b-f8e6-4a62-97cb-c1e565f5adcc</td>
+                    <td>Montaño969 Caridad510</td>
+                    <td>female</td>
+                    <td>1991-06-10</td>
+                    <td>Pepperell</td>
+                    <td>555-114-9406</td>
+                    <td><button value="Przejdź"></button></td>
+                </tr>
+            </tbody>
         </table>
         <div>.</div>
     </div>

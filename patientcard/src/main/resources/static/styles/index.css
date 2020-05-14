@@ -6,7 +6,6 @@ html, body {
     background-size: cover;
 }
 
-
 .column {
     height: 100%;
     float: left;
@@ -17,7 +16,7 @@ html, body {
 }
 
 #contentColumn {
-    display: flex;
+    display: none;
     flex-direction: column;
     align-items: center;
     align-content: center;
