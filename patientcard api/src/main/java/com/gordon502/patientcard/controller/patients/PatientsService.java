@@ -1,8 +1,9 @@
-package com.gordon502.patientcard.patients;
+package com.gordon502.patientcard.controller.patients;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.gordon502.patientcard.model.Patient;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;

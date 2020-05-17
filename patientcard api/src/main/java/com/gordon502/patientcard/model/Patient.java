@@ -1,4 +1,4 @@
-package com.gordon502.patientcard.patients;
+package com.gordon502.patientcard.model;
 
 import java.util.Date;
 
