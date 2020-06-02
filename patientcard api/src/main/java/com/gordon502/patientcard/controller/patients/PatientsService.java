@@ -3,6 +3,7 @@ package com.gordon502.patientcard.controller.patients;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.gordon502.patientcard.controller.JsonUtils;
 import com.gordon502.patientcard.model.Patient;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -22,7 +23,7 @@ public class PatientsService {
             Url += "&family=" + family;
         }
 
-        JsonNode jsonResponse = readJSONFromServer(Url);
+        JsonNode jsonResponse = JsonUtils.readJSONFromServer(Url);
 
         //empty FHIR server
         if (jsonResponse == null) {
@@ -34,7 +35,8 @@ public class PatientsService {
         int numberOfPatients = jsonResponse.get("total").asInt();
 
         for (int i = 0; i < numberOfPatients; i++) {
-            JsonNode patient = jsonResponse.get("entry").get(i).get("resource");
+            System.out.println(i);
+            JsonNode patient = jsonResponse.get("entry").get(i % 10).get("resource");
 
             /**
              * extracting demanded information from FHIR JSON response
@@ -55,20 +57,18 @@ public class PatientsService {
                     address,
                     telecom
             ));
+
+            if (i % 10 == 9 && i != numberOfPatients) { //bundle end
+                for (JsonNode jsonNode: jsonResponse.findValues("link").get(0)) {
+                    if (jsonNode.get("relation").asText().equals("next")){
+                        var nextURL  = jsonNode.get("url").asText();
+                        jsonResponse = JsonUtils.readJSONFromServer(nextURL);
+                        break;
+                    }
+                }
+            }
         }
 
         return patients;
-    }
-
-    private JsonNode readJSONFromServer(String server_addr) {
-        RestTemplate restTemplate = new RestTemplate();
-        ResponseEntity<String> response = restTemplate.getForEntity(server_addr, String.class);
-        ObjectMapper mapper = new ObjectMapper();
-        try {
-            JsonNode root = mapper.readTree(response.getBody());
-            return root;
-        }
-        catch (JsonProcessingException e) { return null; }
-
     }
 }
