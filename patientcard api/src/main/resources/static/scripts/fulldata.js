@@ -100,6 +100,14 @@ function fillTimeLine(sum) {
                     showLess: `<div style="color: blue;">show less</div>`
                 });
             }
+            else {
+                itemss.push({
+                    type: 'smallItem',
+                    label: `<b>${elem["date"].slice(0, 10)}</b><br>${elem["date"].slice(11, 19)}`,
+                    shortContent: `<b>OBSERVATION: ${elem["category"]}</b><br>
+                                           ${elem["code"]}`
+                });
+            }
         }
 
         //MEDICATIONREQUEST
