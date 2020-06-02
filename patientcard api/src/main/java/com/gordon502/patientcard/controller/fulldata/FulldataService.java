@@ -2,10 +2,7 @@ package com.gordon502.patientcard.controller.fulldata;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.gordon502.patientcard.controller.JsonUtils;
-import com.gordon502.patientcard.model.Component;
-import com.gordon502.patientcard.model.DTO;
-import com.gordon502.patientcard.model.MedicationRequest;
-import com.gordon502.patientcard.model.Observation;
+import com.gordon502.patientcard.model.*;
 import org.checkerframework.common.value.qual.ArrayLenRange;
 import org.springframework.stereotype.Service;
 
@@ -16,15 +13,40 @@ import java.util.List;
 public class FulldataService {
 
     public DTO getDetailsFromFHIRServer(String server_addr, String id) {
+        String patientURL = server_addr + "/Patient?_id=" + id;
         String observationURL = server_addr + "/Observation?patient=" + id;
         String medicationRequestURL = server_addr + "/MedicationRequest?patient=" + id;
 
+        Patient patient = getPatient(patientURL);
         List<Observation> observations = getObservations(observationURL);
         List<MedicationRequest> requests = getMedicationRequests(medicationRequestURL);
 
-        DTO dto = new DTO(null, observations, requests);
+        DTO dto = new DTO(patient, observations, requests);
 
         return dto;
+    }
+
+    private Patient getPatient(String url) {
+        JsonNode jsonResponse = JsonUtils.readJSONFromServer(url);
+        var patient = jsonResponse.get("entry").get(0).get("resource");
+
+        /**
+         * extracting demanded information from FHIR JSON response
+         */
+        var id = patient.get("id").asText();
+        var familyName = patient.get("name").get(0).get("family").asText();
+        var givenName =  patient.get("name").get(0).get("given").get(0).asText();
+        var gender = patient.get("gender").asText();
+        var birthDate = patient.get("birthDate").asText();
+        var address = patient.get("address").get(0).get("city").asText();
+        var telecom = patient.get("telecom").get(0).get("value").asText();
+
+        return new Patient(id,
+                           familyName + " " + givenName,
+                            gender,
+                            birthDate,
+                            address,
+                            telecom);
     }
 
     private List<Observation> getObservations(String url) {
