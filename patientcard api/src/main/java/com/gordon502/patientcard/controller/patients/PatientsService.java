@@ -58,7 +58,7 @@ public class PatientsService {
                     telecom
             ));
 
-            if (i % 10 == 9 && i != numberOfPatients) { //bundle end
+            if (i % 10 == 9 && i != numberOfPatients - 1) { //bundle end
                 for (JsonNode jsonNode: jsonResponse.findValues("link").get(0)) {
                     if (jsonNode.get("relation").asText().equals("next")){
                         var nextURL  = jsonNode.get("url").asText();

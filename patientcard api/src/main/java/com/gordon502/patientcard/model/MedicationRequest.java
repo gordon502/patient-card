@@ -31,4 +31,8 @@ public class MedicationRequest {
     public String getAuthoredOn() {
         return authoredOn;
     }
+
+    public String getDosageInstruction() {
+        return dosageInstruction;
+    }
 }
