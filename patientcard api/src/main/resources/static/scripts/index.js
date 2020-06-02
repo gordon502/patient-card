@@ -1,3 +1,5 @@
+const SERVER_ADDR = "http://localhost:8081/"
+
 $(document).ready(function () {
     fillTable();
 });
@@ -23,7 +25,7 @@ function fillTable() {
                             <td>${p["birthDate"]}</td>
                             <td>${p["address"]}</td>
                             <td>${p["telecom"]}</td>
-                            <td><button id="btn${i}">Przejdź</button></td>  
+                            <td><button id="btn${i}" onclick="goToDetails(this.id)">Przejdź</button></td>  
                          </tr>`;
             }
             document.getElementById("rowToInsert").innerHTML = tableStructure;
@@ -85,4 +87,10 @@ function sortTable(n) {
             }
         }
     }
+}
+
+function goToDetails(clicked_id) {
+    const newPage = SERVER_ADDR + "fulldata.html?id=" + document.getElementById("id" + clicked_id.slice(3)).innerText
+
+    window.location.href = newPage;
 }

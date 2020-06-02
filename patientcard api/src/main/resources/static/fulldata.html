@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Karta pacjenta</title>
+    <meta charset="utf8" />
+    <link rel="stylesheet" href="styles/fulldata.css">
+    <link rel="stylesheet" href="styles/jquery.timelineMe.css">
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="scripts/jquery.timelineMe.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script type="text/javascript" src="scripts/fulldata.js"></script>
+    <script>
+        $( function() {
+            $( ".datepicker" ).datepicker();
+            $( "#anim" ).on( "change", function() {
+                $( ".datepicker" ).datepicker( "option", "showAnim", $( this ).val() );
+            });
+        } );
+    </script>
+</head>
+<body>
+<div id="leftColumn" class="column"></div>
+<div id="contentColumn" class="column">
+    <h1>System elektronicznej karty pacjenta</h1>
+    <table id="patientsTable">
+        <thead id="thToInsert">
+        <tr>
+            <th onclick="sss()">ID</th>
+            <th>Nazwisko i imię</th>
+            <th>Płeć</th>
+            <th>Data urodzenia</th>
+            <th>Adres zamieszkania</th>
+            <th>Nr telefonu</th>
+        </tr>
+        </thead>
+        <tbody id="rowToInsert">
+        </tbody>
+    </table>
+    <p>Choose period of time:</p>
+    <p><input type="text" id="dateFrom" class="datepicker" size="30" placeholder="date from"></p>
+    <p><input type="text" id="dateTo" class="datepicker" size="30" placeholder="date to"></p>
+    <p><input type="button" onclick="filterTimeLine()" value="Filter"></p>
+    <div id="timeline-container"></div>
+    <div id ="eldo">.</div>
+</div>
+<div id="rightColumn" class="column"></div>
+</body>
+</html>

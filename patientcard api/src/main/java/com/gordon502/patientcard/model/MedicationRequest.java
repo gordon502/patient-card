@@ -4,15 +4,15 @@ public class MedicationRequest {
     private final String status;
     private final String intent;
     private final String text;
-    private final String authoredOn;
+    private final String date;
     private final String dosageInstruction;
 
     public MedicationRequest(String status, String intent, String text,
-                             String authoredOn, String dosageInstruction) {
+                             String date, String dosageInstruction) {
         this.status = status;
         this.intent = intent;
         this.text = text;
-        this.authoredOn = authoredOn;
+        this.date = date;
         this.dosageInstruction = dosageInstruction;
     }
 
@@ -28,8 +28,8 @@ public class MedicationRequest {
         return text;
     }
 
-    public String getAuthoredOn() {
-        return authoredOn;
+    public String getDate() {
+        return date;
     }
 
     public String getDosageInstruction() {
