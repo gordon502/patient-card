@@ -10,20 +10,20 @@
     <body>
     <div id="leftColumn" class="column"></div>
     <div id="contentColumn" class="column">
-                <h1>System elektronicznej karty pacjenta</h1>
-        <div id="enterName">Wprowadź nazwisko w celu wyszukania konkretnej osoby</div>
-        <input type="text" id="surname" name="surname" placeholder="Nazwisko">
-        <input type="button" id="sendButton" value="Szukaj" onclick="fillTable();">
+                <h1>Patient card system</h1>
+        <div id="enterName">Enter surname to find exact person</div>
+        <input type="text" id="surname" name="surname" placeholder="Surname">
+        <input type="button" id="sendButton" value="Search" onclick="fillTable();">
         <table id="patientsTable">
             <thead id="thToInsert">
                 <tr>
                     <th onclick="sortTable(0)">ID</th>
-                    <th onclick="sortTable(1)">Nazwisko i imię</th>
-                    <th onclick="sortTable(2)">Płeć</th>
-                    <th onclick="sortTable(3)">Data urodzenia</th>
-                    <th onclick="sortTable(4)">Adres zamieszkania</th>
-                    <th onclick="sortTable(5)">Nr telefonu</th>
-                    <th>Szczegóły</th>
+                    <th onclick="sortTable(1)">Surname and Name</th>
+                    <th onclick="sortTable(2)">Sex</th>
+                    <th onclick="sortTable(3)">Birth Date</th>
+                    <th onclick="sortTable(4)">Residence</th>
+                    <th onclick="sortTable(5)">Telecom</th>
+                    <th>Details</th>
                 </tr>
             </thead>
             <tbody id="rowToInsert">
@@ -34,7 +34,7 @@
                     <td>1991-06-10</td>
                     <td>Pepperell</td>
                     <td>555-114-9406</td>
-                    <td><button value="Przejdź"></button></td>
+                    <td><button value="Proceed"></button></td>
                 </tr>
             </tbody>
         </table>

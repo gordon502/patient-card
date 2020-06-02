@@ -25,7 +25,7 @@ function fillTable() {
                             <td>${p["birthDate"]}</td>
                             <td>${p["address"]}</td>
                             <td>${p["telecom"]}</td>
-                            <td><button id="btn${i}" onclick="goToDetails(this.id)">Przejdź</button></td>  
+                            <td><button id="btn${i}" onclick="goToDetails(this.id)">Proceed</button></td>  
                          </tr>`;
             }
             document.getElementById("rowToInsert").innerHTML = tableStructure;
