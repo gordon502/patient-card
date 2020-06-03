@@ -10,6 +10,8 @@
     <script src="scripts/jquery.timelineMe.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script type="text/javascript" src="scripts/fulldata.js"></script>
+
+    <script src="https://canvasjs.com/assets/script/jquery.canvasjs.min.js"></script>
     <script>
         $( function() {
             $( ".datepicker" ).datepicker();
@@ -40,7 +42,15 @@
     <p>Choose period of time:</p>
     <p><input type="text" id="dateFrom" class="datepicker" size="30" placeholder="date from"></p>
     <p><input type="text" id="dateTo" class="datepicker" size="30" placeholder="date to"></p>
-    <p><input type="button" onclick="filterTimeLine()" value="Filter"></p>
+    <p><label for="options">Choose chart:</label>
+        <select name="attribute" id="options">
+            <option value="weight">weight</option>
+            <option value="body mass index">body mass index</option>
+            <option value="height">height</option>
+            <option value="temperature">temperature</option>
+        </select></p>
+    <p><input type="button" onclick="filterTimeLine(); fillChart(Fulldata.sorted, $('#options :selected').val())" value="Filter"></p>
+    <div id="chartContainer" style="height: 370px; width: 100%;"></div>
     <div id="timeline-container"></div>
     <div id ="eldo">.</div>
 </div>

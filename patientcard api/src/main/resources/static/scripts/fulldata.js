@@ -18,9 +18,11 @@ function getAndInsertPatientData() {
             Fulldata.patient = data["patient"];
             Fulldata.observations = data["observations"];
             Fulldata.medicationRequests = data["medicationRequests"];
+
             insertPatientInfo();
             mergeObservationAndRequest();
             fillTimeLine(Fulldata.sorted);
+            fillChart(Fulldata.sorted, "weight");
         });
 
 
@@ -68,6 +70,7 @@ function mergeObservationAndRequest() {
 function fillTimeLine(sum) {
     const itemss = [];
 
+
     sum.forEach(elem => {
 
         // OBSERVATION
@@ -100,6 +103,8 @@ function fillTimeLine(sum) {
                     showLess: `<div style="color: blue;">show less</div>`
                 });
             }
+
+            //REST
             else {
                 itemss.push({
                     type: 'smallItem',
@@ -150,10 +155,8 @@ function GetSortOrder(prop) {
 function filterTimeLine() {
     const dateFrom = document.getElementById("dateFrom").value;
     const dateTo = document.getElementById("dateTo").value;
-
-
-    var dateFromConv = dateFrom.slice(6) + "-" + dateFrom.slice(3,5) + dateFrom.slice(0,2);
-    var dateToConv = dateTo.slice(6) + "-" + dateTo.slice(3,5) + dateTo.slice(0,2);
+    var dateFromConv = dateFrom.slice(6) + "-" + dateFrom.slice(3,5) + "-" + dateFrom.slice(0,2);
+    var dateToConv = dateTo.slice(6) + "-" + dateTo.slice(3,5) + "-" + dateTo.slice(0,2);
 
     if (dateFrom.length == 0) {
         dateFromConv = "1800-01-01";
@@ -165,7 +168,7 @@ function filterTimeLine() {
     const filteredJsons = [];
 
     Fulldata.sorted.forEach(elem => {
-        if (dateToConv >= elem["date"] && elem["date"] >= dateFromConv ) {
+        if (dateToConv >= elem["date"].slice(0, 10) && elem["date"].slice(0,10) >= dateFromConv ) {
             filteredJsons.push(elem);
         }
     });
@@ -173,4 +176,76 @@ function filterTimeLine() {
     $("#timeline-container").timelineMe("destroy");
     fillTimeLine(filteredJsons);
 
+}
+
+function fillChart(sorted, option) {
+    const dateFrom = document.getElementById("dateFrom").value;
+    const dateTo = document.getElementById("dateTo").value;
+    var dateFromConv = dateFrom.slice(6) + "-" + dateFrom.slice(3,5) + dateFrom.slice(0,2);
+    var dateToConv = dateTo.slice(6) + "-" + dateTo.slice(3,5) + dateTo.slice(0,2);
+    var dataPoints = [];
+
+    if (dateFrom.length == 0) {
+        dateFromConv = "1800-01-01";
+    }
+    if (dateTo.length == 0) {
+        dateToConv = "2400-01-01";
+    }
+
+
+    var title = option;
+    var yTitle = "";
+    var code = "";
+
+    if (option == "body mass index") {
+        yTitle = "[kg / m2]";
+        code = "Body Mass Index";
+    }
+    else if (option == "weight") {
+        yTitle = "[kg]";
+        code = "Body Weight";
+    }
+    else if (option == "height") {
+        yTitle = "[cm]";
+        code = "Body Height";
+    }
+    else if (option == "temperature") {
+        yTitle = "[Cel]";
+        code = "Oral temperature";
+    }
+
+    for (var i = sorted.length - 1; i >= 0; i--) {
+        if (sorted[i]["code"] == code) {
+            var date = sorted[i]["date"];
+            if (date >= dateFromConv && date <= dateToConv) {
+                dataPoints.push({
+                    x: new Date(date.slice(0, 10)),
+                    y: parseFloat(sorted[i]["value"].slice(0, 8))
+                });
+            }
+        }
+    }
+
+    var options =  {
+        animationEnabled: true,
+        theme: "light2",
+        title: {
+            text: title
+        },
+        axisX: {
+            valueFormatString: "YYYY-MM-DD",
+        },
+        axisY: {
+            title: yTitle,
+            titleFontSize: 24,
+            includeZero: false
+        },
+        data: [{
+            type: "spline",
+            yValueFormatString: "###.###",
+            dataPoints: dataPoints
+        }]
+    };
+
+    $("#chartContainer").CanvasJSChart(options);
 }
